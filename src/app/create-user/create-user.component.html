@@ -1,3 +1,41 @@
-<p>
-  create-user works!
-</p>
+<div class="principal">
+  <div class="centraliza-meio">
+    <div class="form-login">
+      <mat-toolbar color="primary">
+        <span>
+          Criar Usuario
+        </span>
+      </mat-toolbar>
+      <mat-card class="centralizar-form-login">
+        <form [formGroup]="form" class="login">
+          <mat-form-field class="entrada-texto">
+            <input matInput type="text" placeholder="Nome de usuário" required formControlName="nome" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="form.get('nome').hasError('required')">
+              Nome é exigido</mat-error>
+          </mat-form-field>
+          <mat-form-field class="entrada-texto">
+            <input matInput placeholder="E-mail" type="email" required formControlName="email">
+            <mat-error *ngIf="form.get('email').hasError('email') && !form.get('email').hasError('required')">
+              Entre com um email valido
+            </mat-error>
+            <mat-error *ngIf="form.get('email').hasError('required')">
+              Email é
+              <strong>exigido</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="entrada-texto">
+            <input type="password" matInput placeholder="Senha" required formControlName="pass">
+            <mat-error *ngIf="form.get('pass').hasError('required')">
+              Senha é
+              <strong>exigido</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('pass').hasError('minlength')">
+              Senha menor que 6 caracteres
+            </mat-error>
+          </mat-form-field>
+          <button mat-button color="primary" (click)="fazerLogin($event)">Entra</button>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>
