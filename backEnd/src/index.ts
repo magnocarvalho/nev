@@ -13,7 +13,7 @@ var app = express();
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.DB_HOST,  { poolSize: 5 });
+mongoose.connect(process.env.DB_HOST, { poolSize: 5 });
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -60,3 +60,5 @@ app.use(function (err, req, res, next) {
 });
 var port = process.env.PORT || 1337;
 app.listen(port);
+
+
