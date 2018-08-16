@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-create-user',

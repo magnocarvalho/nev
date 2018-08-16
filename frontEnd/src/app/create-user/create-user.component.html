@@ -9,8 +9,13 @@
       <mat-card class="centralizar-form-login">
         <form [formGroup]="form" class="login">
           <mat-form-field class="entrada-texto">
-            <input matInput type="text" placeholder="Nome de usuário" required formControlName="nome" [errorStateMatcher]="matcher">
+            <input matInput type="text" placeholder="Nome de usuário" required formControlName="nome" >
             <mat-error *ngIf="form.get('nome').hasError('required')">
+              Nome é exigido</mat-error>
+          </mat-form-field>
+          <mat-form-field class="entrada-texto">
+            <input matInput type="text" placeholder="Indicado por?" required formControlName="painame">
+            <mat-error *ngIf="form.get('painame').hasError('required')">
               Nome é exigido</mat-error>
           </mat-form-field>
           <mat-form-field class="entrada-texto">
