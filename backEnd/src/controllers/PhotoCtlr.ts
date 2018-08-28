@@ -1,6 +1,5 @@
 import { photosModel, IUsuarioPhotos } from "./../model/definitions/Photo";
 
-const fs = require("fs");
 
 class PhotoCtlr {
   static create(req, res, next) {
@@ -10,48 +9,7 @@ class PhotoCtlr {
       else res.json(data);
     });
   }
-  static putPhotos(req, res, next) {
-    var obj = req.body;
-    var nomeAlbum = obj.nome;
-    var nomePhoto = obj.namePhoto;
-    var userId = obj.userID;
-    var photoname = [];
-    if (!fs.existsSync("./bin/assets/" + userId)) {
-      fs.mkdirSync("./bin/assets/" + userId);
-    }
-    fs.mkdirSync("./bin/assets/" + userId + "/" + nomeAlbum + "/");
-
-    if (obj.photo) {
-      for (let i = 0; i < nomePhoto.length; i++) {
-        var base64Data = obj.photo[i].replace(
-          /^data:image\/[a-z]+;base64,/,
-          ""
-        );
-        photoname.push(
-          "assets/" + userId + "/" + nomeAlbum + "/" + nomePhoto[i] + ".png"
-        );
-        fs.writeFile(
-          "./bin/assets/" +
-            userId +
-            "/" +
-            nomeAlbum +
-            "/" +
-            nomePhoto[i] +
-            ".png",
-          base64Data,
-          "base64",
-          function(err) {
-            if (err) console.log("err = " + err);
-          }
-        );
-      }
-      obj.namePhotos = photoname;
-    }
-    photosModel.create(obj, (err, data) => {
-      if (err) next(err);
-      else res.json(data);
-    });
-  }
+ 
   static buscarAlbuns(req, res, next) {
     var obj = req.params.id;
     PhotoCtlr.getByIdUser(obj).then(
@@ -86,59 +44,7 @@ class PhotoCtlr {
       }
     );
   }
-  static addFotos(req, res, next) {
-    var obj = req.body;
-    var nomeAlbum = obj.nome;
-    var nomePhoto = obj.namePhoto;
-    var userId = obj.userID;
-    var photoname = [];
-    if (!fs.existsSync("./bin/assets/" + userId)) {
-      fs.mkdirSync("./bin/assets/" + userId);
-    }
-    if (!fs.existsSync("./bin/assets/" + userId + "/" + nomeAlbum)) {
-      fs.mkdirSync("./bin/assets/" + userId + "/" + nomeAlbum + "/");
-    }
-
-    if (obj.photo) {
-      for (let i = 0; i < nomePhoto.length; i++) {
-        var base64Data = obj.photo[i].replace(
-          /^data:image\/[a-z]+;base64,/,
-          ""
-        );
-        photoname.push(
-          "assets/" + userId + "/" + nomeAlbum + "/" + nomePhoto[i] + ".png"
-        );
-        fs.writeFile(
-          "./bin/assets/" +
-            userId +
-            "/" +
-            nomeAlbum +
-            "/" +
-            nomePhoto[i] +
-            ".png",
-          base64Data,
-          "base64",
-          function(err) {
-            if (err) console.log("err = " + err);
-          }
-        );
-        
-        
-      }
-    }
-    for (let i = 0; i < photoname.length; i++) {
-      obj.namePhotos = photoname[i];        
-    }
-    console.log(photoname);
-    PhotoCtlr.addFotosArray(obj).then(
-      data => {
-        res.json(data);
-      },
-      err => {
-        next(err);
-      }
-    );
-  }
+  
   private static addFotosArray(obj) {
     return new Promise<IUsuarioPhotos>((resolve, reject) => {
       photosModel.findOneAndUpdate(

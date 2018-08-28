@@ -1,7 +1,9 @@
 import * as express from 'express';
-import UsuarioCtrl from '../controllers/UsuarioCtrl';
+
 import { photosModel } from '../model/definitions/Photo';
-import PhotoCtlr from '../controllers/photoCtlr';
+import UsuarioCtrl from '../controllers/UsuarioCtrl';
+import PhotoCtlr from '../controllers/PhotoCtlr';
+
 
 var mcache = require('memory-cache');
 
@@ -41,14 +43,7 @@ var descache = () => {
 router.post('/salvarUsuario',UsuarioCtrl.create);
 router.post('/loginUser', UsuarioCtrl.login);
 router.post('/getUsers',  cache(10), UsuarioCtrl.getDadosUsuario);
-
-
-router.post('/salvarFotos', descache() ,PhotoCtlr.putPhotos);
 router.get('/carregarAlbuns/:id', cache(10), PhotoCtlr.buscarAlbuns);
 router.get('/carregarFotos/:id', cache(10), PhotoCtlr.buscarAlbum);
 router.post('/apagarFoto', PhotoCtlr.deletarFoto);
-router.put('/addFotos', descache(),PhotoCtlr.addFotos);
-
-
-
 export = router;
