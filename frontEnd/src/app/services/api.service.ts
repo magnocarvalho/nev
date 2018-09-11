@@ -92,7 +92,7 @@ export class ApiService {
   }
   carregarUsuarios(user)
   {
-    return this.doRequest('get', 'getUsers/' + user);
+    return this.doRequest('get', 'getUsers/', user);
   }
 
 }

@@ -27,8 +27,8 @@ class UsuarioCtrl {
  
 
   static getDadosUsuario(req, res, next) {
-    var obj = req.params.id;
-    UsuarioCtrl.getById(obj).then(
+    
+    UsuarioCtrl.getAllUsuarios().then(
       data => {
         res.json(data);
       },
@@ -73,6 +73,17 @@ class UsuarioCtrl {
   {
     return new Promise<IUsuarioModel>((resolve, reject) => {
       UsuarioModel.find({ isDeleted: false, painame: painome }, {pass:0}, (err, data) => {
+        if (err || data === null) reject(err);
+        else {
+          resolve(data);
+        }
+      });
+    });
+  }
+  private static getAllUsuarios()
+  {
+    return new Promise<IUsuarioModel>((resolve, reject) => {
+      UsuarioModel.find({ isDeleted: false }, {pass:0}, (err, data) => {
         if (err || data === null) reject(err);
         else {
           resolve(data);
