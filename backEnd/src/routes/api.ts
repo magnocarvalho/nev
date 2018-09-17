@@ -42,7 +42,7 @@ var descache = () => {
 }
 router.post('/salvarUsuario',UsuarioCtrl.create);
 router.post('/loginUser', UsuarioCtrl.login);
-router.post('/getUsers',  cache(10), UsuarioCtrl.getDadosUsuario);
+router.get('/getUsers',  UsuarioCtrl.getDadosUsuario);
 router.get('/carregarAlbuns/:id', cache(10), PhotoCtlr.buscarAlbuns);
 router.get('/carregarFotos/:id', cache(10), PhotoCtlr.buscarAlbum);
 router.post('/apagarFoto', PhotoCtlr.deletarFoto);

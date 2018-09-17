@@ -27,7 +27,7 @@ class UsuarioCtrl {
  
 
   static getDadosUsuario(req, res, next) {
-    
+    console.log(req);
     UsuarioCtrl.getAllUsuarios().then(
       data => {
         res.json(data);

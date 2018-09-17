@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     let parm = this.auth.getUsuario;
     console.log(parm);
-    this.api.carregarUsuarios(parm).subscribe(res =>{
+    this.api.carregarUsuarios().subscribe(res =>{
       this.usuarios = res;
     })
   }

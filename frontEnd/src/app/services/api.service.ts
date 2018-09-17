@@ -90,9 +90,9 @@ export class ApiService {
   {
     return this.doRequest('put', 'addFotos', obj);
   }
-  carregarUsuarios(user)
+  carregarUsuarios()
   {
-    return this.doRequest('get', 'getUsers/', user);
+    return this.doRequest('get', 'getUsers/');
   }
 
 }
