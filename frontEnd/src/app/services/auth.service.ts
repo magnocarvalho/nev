@@ -7,7 +7,6 @@ import { ApiService } from './api.service';
 })
 export class AuthService {
 
-
   private sub: Subscriber<boolean>;
   public onLogin: Observable<boolean>;
   public usuario: any;
@@ -46,27 +45,10 @@ export class AuthService {
     this.api.fazerLogin(obj).subscribe(res => {
       this.usuario = JSON.parse(res._body);
       localStorage.setItem('id', this.usuario._id);
-      
       sub.next(res);
     }, userErr => {
       sub.error(userErr);
     });
-    //fazer login melhorar 
-
-    // this.api.buscarUsuario(this.usuario.id).subscribe(res => {
-    //   if (!this.usuario) {
-    //     this.usuario = res;
-    //     console.log('login feito com sucesso');
-    //   } else {
-    //     if (this.usuario.email != res.email) {
-    //       sub.error('erro no login');
-    //     }
-    //   }
-    //   sub.next(res);
-    // }, userErr => {
-    //   sub.error(userErr);
-    // });
-
     return obs;
   }
 
